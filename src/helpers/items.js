@@ -38,7 +38,7 @@ const prepareItemDetail = (itemDetails, itemDescription) => {
   const details = prepareItem(itemDetails);
   const description = itemDescription.plain_text;
 
-  return { ...details, description };
+  return { item: { ...details }, description };
 };
 
 module.exports = () => ({
