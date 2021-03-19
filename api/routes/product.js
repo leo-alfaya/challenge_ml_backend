@@ -1,5 +1,7 @@
 module.exports = (app) => {
   const controller = require("../controllers/product")();
 
-  app.route("/api/v1/products").get(controller.getProducts);
+  app.get("/api/items", controller.getItems);
+  app.get("/api/items/:id", controller.getItemDetail);
+
 };
