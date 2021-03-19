@@ -12,7 +12,7 @@ module.exports = () => {
   app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
   //APPLICATION ROUTES
-  require("../api/routes/product")(app);
+  require("../src/routes/product")(app);
 
   return app;
 };
