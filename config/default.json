@@ -1,5 +1,6 @@
 {
   "server": {
-    "port" : 3000
+    "port": 3000,
+    "mercado-libre-base-url": "https://api.mercadolibre.com"
   }
 }
