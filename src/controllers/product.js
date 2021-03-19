@@ -1,4 +1,5 @@
 const api = require("../api")();
+const itemHelpers = require("../helpers/items")();
 
 module.exports = () => {
   const controller = {};
@@ -10,7 +11,9 @@ module.exports = () => {
     const items = await api.get(`${BASE_URL}/sites/MLA/search?q=${q}`);
 
     if (!items.error) {
-      res.status(200).json({ data: items.data });
+      const preparedItems = itemHelpers.prepareItems(items.data);
+
+      res.status(200).json({ data: preparedItems });
     } else {
       res.status(502).json({ error: items.message });
     }
@@ -22,14 +25,18 @@ module.exports = () => {
     const { id } = req.params;
 
     const itemDetail = await api.get(`${BASE_URL}/items/${id}`);
-    const itemDescription = await api.get(`${BASE_URL}/items/${id}/description`);    
+    const itemDescription = await api.get(
+      `${BASE_URL}/items/${id}/description`
+    );
 
     if (!itemDetail.error && !itemDescription.error) {
+      const preparedItem = itemHelpers.prepareItemDetail(
+        itemDetail.data,
+        itemDescription.data
+      );
+
       res.status(200).json({
-        data: {
-          itemDetail: itemDetail.data,
-          itemDescription: itemDescription.data,
-        },
+        data: { ...preparedItem },
       });
     } else {
       res
