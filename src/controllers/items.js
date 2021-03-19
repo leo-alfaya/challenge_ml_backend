@@ -26,6 +26,9 @@ module.exports = () => {
     const itemDetail = await api.get(`/items/${id}`);
     const itemDescription = await api.get(`/items/${id}/description`);
 
+    console.log("itemDetail => ", itemDetail)
+    console.log("itemDescription => ", itemDescription)
+
     if (!itemDetail.error && !itemDescription.error) {
       const preparedItem = itemHelpers.prepareItemDetail(
         itemDetail.data,
